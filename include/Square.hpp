@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Array.hpp"
 #include "Figure.hpp"
 
 
@@ -18,7 +17,7 @@ public:
     ~Square() = default;
 
 private:
-    Array<std::shared_ptr<Point<T>>> points;
+    std::unique_ptr<Point<T>> pt1, pt2, pt3, pt4;
 };
 
 #include "Square.ipp"
