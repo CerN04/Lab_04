@@ -1,7 +1,6 @@
 #pragma once
 
 
-#include <memory>
 template <typename T> Array<T>::Array() : size(0), capacity(1), data(new T[1], deleter) {};
 
 template <typename T> Array<T>::Array(const size_t &n, const T &t) : size(n), data(new T[n], deleter), capacity(n) {
