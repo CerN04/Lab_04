@@ -2,9 +2,9 @@
 
 
 #include <memory>
-template <typename T> Array<T>::Array() : size(0), capacity(1), data(new T[1], deleter) {};
+template <typename T> Array<T>::Array() : size(0), capacity(1), data(new T[1], std::default_delete<T[]>()) {};
 
-template <typename T> Array<T>::Array(const size_t &n, const T &t) : size(n), data(new T[n], deleter), capacity(n) {
+template <typename T> Array<T>::Array(const size_t &n, const T &t) : size(n), data(new T[n], std::default_delete<T[]>()), capacity(n) {
     for (size_t i = 0; i < n; ++i) {
         data[i] = t;
     }
@@ -12,7 +12,7 @@ template <typename T> Array<T>::Array(const size_t &n, const T &t) : size(n), da
 
 template <typename T>
 Array<T>::Array(const Array<T> &other)
-    : size(other.size), data(new T[other.capacity], deleter), capacity(other.capacity) {
+    : size(other.size), data(new T[other.capacity], std::default_delete<T[]>()), capacity(other.capacity) {
     for (size_t i = 0; i < other.size; ++i) {
         data[i] = other.data[i];
     }
@@ -35,7 +35,7 @@ template <typename T> void Array<T>::Resize(size_t new_size) {
     }
     if (new_size > capacity) {
         size_t new_capacity = std::max(new_size, capacity * 2);
-        std::shared_ptr<T[]> new_data(new T[new_capacity], deleter);
+        std::shared_ptr<T[]> new_data(new T[new_capacity], std::default_delete<T[]>());
         for (size_t i = 0; i < size; ++i) {
             new_data[i] = std::move(data[i]);
         }

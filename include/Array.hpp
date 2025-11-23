@@ -10,7 +10,6 @@ template <typename T> class Array {
 private:
     size_t size = 0;
     std::shared_ptr<T[]> data;
-    static constexpr auto deleter = [](T* ptr) { delete[] ptr; };
     size_t capacity = 1;
 
 public:
